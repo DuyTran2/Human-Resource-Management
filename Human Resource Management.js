@@ -18,7 +18,7 @@ var personels = [
 function renderPersonel(){
     let htmls = personels.map(function(personel){
         return `
-                <tr>
+                <tr id='tr_${personel.id}'>
                     <td>${personel.id}</td>
                     <td>${personel.name}</td>
                     <td>
@@ -32,7 +32,9 @@ function renderPersonel(){
                     <td>${personel.timeworking}</td>
                     <td>${personel.salary}</td>
                     <td>
-                        <i class="fa-solid fa-user-pen" onclick='editPersonel(${personel.id}')></i>
+                        <i class="fa-solid fa-user-pen" class="btn-edit" onclick='editPersonel(${personel.id})'></i>
+                        <button class="btn-save d-none" onclick='save(${personel.id})'>Save</button>
+                        <button class="btn-cancel d-none" onclick='cancel(${personel.id})'>Cancel</button>
                         <i class="fa fa-trash" onclick='removePersonel(${personel.id})'></i>
                     </td>
                 </tr>
@@ -108,8 +110,12 @@ function removePersonel(personelID){
     }
 }
 function editPersonel(personelID){
-    alert("a");
+    document.querySelector(`#tr_${personel.id}.btn-edit`).classList.remove('d-none');
+    document.querySelector(`#tr_${personel.id}.btn-save`).classList.add('d-none');
+    document.querySelector(`#tr_${personel.id}.btn-cancel`).classList.add('d-none');
+    document.querySelector(`#tr_${personel.id}`).innerHTML = personels[personel.id];
 }
+
 
 init();
 renderPersonel();

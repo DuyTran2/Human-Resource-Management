@@ -65,3 +65,20 @@ h1{
     color: aliceblue;
     max-width: 900px;
 }
+.btn-save{
+    background-color: orange;
+    color: aliceblue;
+    border-color: darkorange;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.btn-cancel{
+    background-color: red;
+    color:aliceblue;
+    border-color: darkred;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.d-none{
+    display: none;
+}
