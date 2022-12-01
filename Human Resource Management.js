@@ -18,7 +18,7 @@ var personels = [
 function renderPersonel(){
     let htmls = personels.map(function(personel){
         return `
-                <tr id='tr_${personel.id}'>
+                <tr>
                     <td>${personel.id}</td>
                     <td>${personel.name}</td>
                     <td>
@@ -32,9 +32,9 @@ function renderPersonel(){
                     <td>${personel.timeworking}</td>
                     <td>${personel.salary}</td>
                     <td>
-                        <i class="fa-solid fa-user-pen" class="btn-edit" onclick='editPersonel(${personel.id})'></i>
-                        <button class="btn-save d-none" onclick='save(${personel.id})'>Save</button>
-                        <button class="btn-cancel d-none" onclick='cancel(${personel.id})'>Cancel</button>
+                        <i class="fa-solid fa-user-pen" class="btn-edit"  onclick='editPersonel(${personel.id})'></i>
+                        <button class="btn-save d-none" id="btn-save-${personel.id}" onclick='save(${personel.id})'>Save</button>
+                        <button class="btn-cancel d-none" id="btn-cancel-${personel.id}" onclick='cancel(${personel.id})'>Cancel</button>
                         <i class="fa fa-trash" onclick='removePersonel(${personel.id})'></i>
                     </td>
                 </tr>
@@ -110,10 +110,53 @@ function removePersonel(personelID){
     }
 }
 function editPersonel(personelID){
-    document.querySelector(`#tr_${personel.id}.btn-edit`).classList.remove('d-none');
-    document.querySelector(`#tr_${personel.id}.btn-save`).classList.add('d-none');
-    document.querySelector(`#tr_${personel.id}.btn-cancel`).classList.add('d-none');
-    document.querySelector(`#tr_${personel.id}`).innerHTML = personels[personel.id];
+    let person = personels.find(function(person){
+        return person.id == personelID
+    })
+    document.querySelector('#id').value= person.id;
+    document.querySelector('#name').value = person.name;
+    document.querySelector('#avatar').value = person.avatar;
+    document.querySelector('#phonenumber').value = person.phonenumber;
+    document.querySelector('#address').value = person.address;
+    document.querySelector('#dob').value = person.dob;
+    document.querySelector('#taxcode').value = person.taxcode;
+    document.querySelector('#jobposition').value = person.jobposition;
+    document.querySelector('#timeworking').value = person.timeworking;
+    document.querySelector('#salary').value = person.salary;
+    var element_btn_save = document.getElementById("btn-save-"+personelID);
+        element_btn_save.classList.remove("d-none");
+    var element_btn_cancel = document.getElementById("btn-cancel-"+personelID);
+        element_btn_cancel.classList.remove("d-none");
+        
+}
+function save(personelID){
+    let person = personels.find(function(person){
+        return person.id == personelID
+    })
+    person.name = document.querySelector('#name').value;
+    person.avatar = document.querySelector('#avatar').value;
+    person.phonenumber = document.querySelector('#phonenumber').value;
+    person.address = document.querySelector('#address').value;
+    person.dob = document.querySelector('#dob').value;
+    person.taxcode = document.querySelector('#taxcode').value;
+    person.jobposition = document.querySelector('#jobposition').value;
+    person.timeworking = document.querySelector('#timeworking').value;
+    person.salary = document.querySelector('#salary').value;
+    var element_btn_save= document.getElementById("btn-save-"+personelID);
+        element_btn_save.classList.add("d-none");
+    var element_btn_cancel = document.getElementById("btn-cancel-"+personelID);
+        element_btn_cancel.classList.add("d-none");
+    localStorage.setItem(personel_key, JSON.stringify(personels));
+    renderPersonel();
+    resetForm()
+    
+}
+function cancel(personelID){
+    var element_btn_save= document.getElementById("btn-save-"+personelID);
+        element_btn_save.classList.add("d-none");
+    var element_btn_cancel = document.getElementById("btn-cancel-"+personelID);
+        element_btn_cancel.classList.add("d-none");
+    resetForm()
 }
 
 
