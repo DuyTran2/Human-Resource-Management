@@ -80,11 +80,11 @@ const personel_key ="data";
 function init(){
     if(localStorage.getItem(personel_key) == null){
         personels = [
-            new Personel (1,'Nguyễn Văn A',`${avatar_url}3`, '0901234567', '123A', '12/2/2022', '12345','HR Manager','4','350$'),
-            new Personel (2,'Nguyễn Văn B',`${avatar_url}4`, '0901234568', '123B', '12/2/2022', '45356','Chief Human Resources Officer','4','3000$'),
-            new Personel (3,'Nguyễn Văn C',`${avatar_url}2`, '0901234569', '123C', '12/2/2022', '23567','HR admin','4','450$'),
-            new Personel (4,'Nguyễn Văn D',`${avatar_url}7`, '0901234565', '123D', '12/2/2022', '24576','Recruitment Specialist','4','750$'),
-            new Personel (5,'Nguyễn Văn E',`${avatar_url}10`, '0901234566', '123E', '12/2/2022', '24565','Training and Development Specialist','4','650$'),
+            new Personel (1,'Nguyễn Văn A',`${avatar_url}3`, '0901234567', '123A', '12/2/2022', '12345','HRManager','4','350$'),
+            new Personel (2,'Nguyễn Văn B',`${avatar_url}4`, '0901234568', '123B', '12/2/2022', '45356','ChiefHumanResourcesOfficer','4','3000$'),
+            new Personel (3,'Nguyễn Văn C',`${avatar_url}2`, '0901234569', '123C', '12/2/2022', '23567','HRAdmin','4','450$'),
+            new Personel (4,'Nguyễn Văn D',`${avatar_url}7`, '0901234565', '123D', '12/2/2022', '24576','RecruitmentSpecialist','4','750$'),
+            new Personel (5,'Nguyễn Văn E',`${avatar_url}10`, '0901234566', '123E', '12/2/2022', '24565','TrainingAndDevelopmentSpecialist','4','650$'),
         ];
         localStorage.setItem(personel_key, JSON.stringify(personels));
     }else{
