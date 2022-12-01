@@ -1,5 +1,6 @@
 class Personel{
-    constructor(name, avatar, phonenumber , address, dob,taxcode, jobposition, timeworking, salary){
+    constructor(id,name, avatar, phonenumber , address, dob,taxcode, jobposition, timeworking, salary){
+        this.id = id;
         this.name = name;
         this. avatar = avatar;
         this.phonenumber = phonenumber;
@@ -18,6 +19,7 @@ function renderPersonel(){
     let htmls = personels.map(function(personel){
         return `
                 <tr>
+                    <td>${personel.id}</td>
                     <td>${personel.name}</td>
                     <td>
                         <img src="${personel.avatar}">
@@ -43,6 +45,7 @@ function changeAvatar(){
     document.querySelector('#reviewAvatar').src = document.querySelector('#avatar').value || `https://t4.ftcdn.net/jpg/03/59/58/91/360_F_359589186_JDLl8dIWoBNf1iqEkHxhUeeOulx0wOC5.jpg`;
 }
 function addPersonel(){
+    let id = document.querySelector('#id').value;
     let name = document.querySelector('#name').value;
     let avatar= document.querySelector('#avatar').value;
     let phonenumber = document.querySelector('#phonenumber').value;
@@ -59,6 +62,7 @@ function addPersonel(){
     resetForm()
 }
 function resetForm(){
+    document.querySelector('#id').value="";
     document.querySelector('#name').value ="";
     document.querySelector('#avatar').value ="";
     document.querySelector('#phonenumber').value ="";
@@ -74,11 +78,11 @@ const personel_key ="data";
 function init(){
     if(localStorage.getItem(personel_key) == null){
         personels = [
-            new Personel ('Nguyễn Văn A',`${avatar_url}3`, 'Phone Number', 'Address', '12/2/2022', 'Tax Code','HR Manager','4','350$'),
-            new Personel ('Nguyễn Văn A',`${avatar_url}3`, 'Phone Number', 'Address', '12/2/2022', 'Tax Code','HR Manager','4','350$'),
-            new Personel ('Nguyễn Văn A',`${avatar_url}3`, 'Phone Number', 'Address', '12/2/2022', 'Tax Code','HR Manager','4','350$'),
-            new Personel ('Nguyễn Văn A',`${avatar_url}3`, 'Phone Number', 'Address', '12/2/2022', 'Tax Code','HR Manager','4','350$'),
-            new Personel ('Nguyễn Văn A',`${avatar_url}3`, 'Phone Number', 'Address', '12/2/2022', 'Tax Code','HR Manager','4','350$'),
+            new Personel (1,'Nguyễn Văn A',`${avatar_url}3`, '0901234567', '123A', '12/2/2022', '12345','HR Manager','4','350$'),
+            new Personel (2,'Nguyễn Văn B',`${avatar_url}4`, '0901234568', '123B', '12/2/2022', '45356','Chief Human Resources Officer','4','3000$'),
+            new Personel (3,'Nguyễn Văn C',`${avatar_url}2`, '0901234569', '123C', '12/2/2022', '23567','HR admin','4','450$'),
+            new Personel (4,'Nguyễn Văn D',`${avatar_url}7`, '0901234565', '123D', '12/2/2022', '24576','Recruitment Specialist','4','750$'),
+            new Personel (5,'Nguyễn Văn E',`${avatar_url}10`, '0901234566', '123E', '12/2/2022', '24565','Training and Development Specialist','4','650$'),
         ];
         localStorage.setItem(personel_key, JSON.stringify(personels));
     }else{
@@ -86,29 +90,27 @@ function init(){
     }
 }
 
-init();
-renderPersonel();
+
 function removePersonel(personelID){
     let confirm = window.confirm('Are you sure to remove this personel?');
     if(confirm){
-        personels.splice(0,id);
-        localStorage.setItem(personel_key,JSON.stringify(personels));
-        renderPersonel();
+        // personels.splice(0,id);
+        // localStorage.setItem(personel_key,JSON.stringify(personels));
+        // renderPersonel();
+        for (var k in personels){
+            if(personels[k]["id"] == personelID){
+                personels.splice(k, 1);
+                localStorage.setItem(personel_key,JSON.stringify(personels));
+                renderPersonel()
+            }
+        }
+        
     }
 }
 function editPersonel(personelID){
-    let personel = personels.find(function(person){
-        return person.id === personelID;
-    })
-    document.querySelector('#name').value =personel.name;
-    document.querySelector('#avatar').value =personel.avatar;
-    document.querySelector('#phonenumber').value = personel.phonenumber;
-    document.querySelector('#address').value = personel.address;
-    document.querySelector('#dob').value = personel.dob;
-    document.querySelector('#taxcode').value = personel.taxcode;
-    document.querySelector('#jobposition').value = personel.jobposition;
-    document.querySelector('#timeworking').value =personel.timeworking;
-    document.querySelector('#salary').value = personel.salary;
-    document.querySelector('#reviewAvatar').src =personel.avatar;
+    alert("a");
 }
-editPersonel()
+
+init();
+renderPersonel();
+
