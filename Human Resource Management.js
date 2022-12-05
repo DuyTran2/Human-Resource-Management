@@ -2,7 +2,7 @@ class Personel{
     constructor(id,name, avatar, phonenumber , address, dob,taxcode, jobposition, timeworking, salary){
         this.id = id;
         this.name = name;
-        this. avatar = avatar;
+        this.avatar = avatar;
         this.phonenumber = phonenumber;
         this.address = address;
         this.dob = dob;
@@ -47,7 +47,8 @@ function changeAvatar(){
     document.querySelector('#reviewAvatar').src = document.querySelector('#avatar').value || `https://t4.ftcdn.net/jpg/03/59/58/91/360_F_359589186_JDLl8dIWoBNf1iqEkHxhUeeOulx0wOC5.jpg`;
 }
 function addPersonel(){
-    let id = document.querySelector('#id').value;
+    let id = getMaxId() + 1;
+    console.log(id);
     let name = document.querySelector('#name').value;
     let avatar= document.querySelector('#avatar').value;
     let phonenumber = document.querySelector('#phonenumber').value;
@@ -57,11 +58,12 @@ function addPersonel(){
     let jobposition = document.querySelector('#jobposition').value;
     let timeworking = document.querySelector('#timeworking').value;
     let salary = document.querySelector('#salary').value;
-    let personel = new Personel(name, avatar, phonenumber, address, dob, taxcode, jobposition, timeworking, salary);
+    let personel = new Personel(id,name, avatar, phonenumber, address, dob, taxcode, jobposition, timeworking, salary);
     personels.push(personel);
     localStorage.setItem(personel_key,JSON.stringify(personels));
     renderPersonel();
-    resetForm()
+    resetForm();
+
 }
 function resetForm(){
     document.querySelector('#id').value="";
@@ -150,6 +152,15 @@ function save(personelID){
     renderPersonel();
     resetForm()
     
+}
+function getMaxId() {
+    let max = 0;
+    for (let i = 0; i < personels.length; i++) {
+        if (personels[i].id > max) {
+            max = personels[i].id
+        }
+    }
+    return max;
 }
 function cancel(personelID){
     var element_btn_save= document.getElementById("btn-save-"+personelID);
